@@ -88,9 +88,9 @@ def get_all_products():
         try:
             url = "https://kaspi.kz/shop/c/categories/?sort=rating&page=" + str(i+1)
             r = session.get(url)
-            # r.html.render()
+            r.html.render()
             products = r.html.find(".item-card__name-link")
-            print(products)
+            # print(products)
             for el in products:
                 name = el.text
                 link = list(el.absolute_links)[0]
