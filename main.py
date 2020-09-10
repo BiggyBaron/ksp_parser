@@ -85,17 +85,21 @@ def get_all_products():
     all_pros = []
 
     for i in tqdm(range(5000)):
-        url = "https://kaspi.kz/shop/c/categories/?sort=rating&page=" + str(i+1)
-        r = session.get(url)
-        r.html.render()
-        products = r.html.find(".item-card__name-link")
-        for el in products:
-            name = el.text
-            link = list(el.absolute_links)[0]
-            all_pros.append([name, link])
-        
-        with open('products.json', 'w', encoding='utf-8') as f:
-            json.dump(all_pros, f, ensure_ascii=False)
+        try:
+            url = "https://kaspi.kz/shop/c/categories/?sort=rating&page=" + str(i+1)
+            r = session.get(url)
+            # r.html.render()
+            products = r.html.find(".item-card__name-link")
+            print(products)
+            for el in products:
+                name = el.text
+                link = list(el.absolute_links)[0]
+                all_pros.append([name, link])
+            
+            with open('products.json', 'a', encoding='utf-8') as f:
+                json.dump(all_pros, f, ensure_ascii=False)
+        except:
+            pass
 
 
 if __name__=="__main__":
