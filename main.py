@@ -95,7 +95,7 @@ def get_all_products():
                 name = el.text
                 link = list(el.absolute_links)[0]
                 all_pros.append([name, link])
-            
+                print([name, link])
             with open('products.json', 'a', encoding='utf-8') as f:
                 json.dump(all_pros, f, ensure_ascii=False)
         except:
